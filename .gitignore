@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+*.pyc 
+astra.db 
+.env
+.DS_Store
