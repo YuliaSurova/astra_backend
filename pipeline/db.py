@@ -1,13 +1,14 @@
 from sqlalchemy import (
     BigInteger,
     Column,
-    Date, 
+    Date,
     Float,
     ForeignKey,
+    Index,
     Integer,
     MetaData,
     String,
-    Table,  
+    Table,
     Text,
 )
 BIGINT_PK =BigInteger().with_variant(Integer, "sqlite")
@@ -46,6 +47,9 @@ building_materials_transactions = Table(
     Column("unit_price", Float),
     Column("revenue", Float),
 )
+# Индекс по дате: ускоряет поиск максимальной даты (инкрементальная загрузка) и JOIN
+Index("ix_transactions_date", building_materials_transactions.c.date)
+
 data_dictionary = Table(
     "data_dictionary",
     metadata,
